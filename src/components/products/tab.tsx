@@ -15,14 +15,14 @@ export const ProductsTab = async () => {
 
   const tabs: Tab[] = [
     {
-      title: "Sushi",
-      value: "sushi",
-      products: products.filter((item) => item.category === "sushi"),
+      title: "Traditional",
+      value: "traditional",
+      products: products.filter((item) => item.category === "traditional"),
     },
     {
-      title: "Temaki",
-      value: "temaki",
-      products: products.filter((item) => item.category === "temaki"),
+      title: "Modern",
+      value: "modern",
+      products: products.filter((item) => item.category === "modern"),
     },
     {
       title: "Combo",
@@ -37,7 +37,7 @@ export const ProductsTab = async () => {
   ];
 
   return (
-    <Tabs defaultValue="sushi">
+    <Tabs defaultValue="traditional">
       <TabsList className="flex">
         {tabs.map((item) => (
           <TabsTrigger key={item.value} value={item.value} className="flex-1">
