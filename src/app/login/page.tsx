@@ -1,69 +1,70 @@
+'use client';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { FacebookIcon } from '@/components/icons/facebook';
-import { ChromeIcon } from '@/components/icons/chrome';
-import { QrCodeIcon } from '@/components/icons/qrcode';
-import { UserIcon } from '@/components/icons/user';
+export default function Component() {
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const router = useRouter();
 
-export default function Login() {
-    const buttons = [
-        {
-            icon: QrCodeIcon,
-            label: 'Use QR code',
-            style: 'border border-gray-300 text-black',
-        },
-        {
-            icon: UserIcon,
-            label: 'Use phone / email / username',
-            style: 'border border-gray-300 text-black',
-        },
-        {
-            icon: FacebookIcon,
-            label: 'Continue with Facebook',
-            style: 'border border-gray-300 bg-[#1877f2] text-white',
-        },
-        {
-            icon: ChromeIcon,
-            label: 'Continue with Google',
-            style: 'border border-gray-300 text-black',
-        },
-    ];
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (username === 'admin@admin' && password === '1') {
+            router.push('/admin');
+        } else if (password === '1') {
+            router.push('/main');
+        } else {
+            alert('Invalid credentials');
+        }
+    };
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">
-            <div className="w-112 border-tiktok-red rounded-md border-2 bg-white pb-8 pl-12 pr-12 pt-16">
-                <h1 className="mb-6 p-4 text-center text-3xl font-bold text-black">Log in to Koala</h1>
-
-                {buttons.map((button, index) => (
-                    <Button key={index} className={`mb-4 flex w-full items-center justify-center ${button.style}`}>
-                        <button.icon className="mr-2" />
-                        <div className="flex-1">{button.label}</div>
-                    </Button>
-                ))}
-
-                <div className="mb-6 flex w-full items-center">
-                    <div className="flex-grow border-t border-gray-300" />
-                    <span className="px-4 text-sm text-gray-500">OR</span>
-                    <div className="flex-grow border-t border-gray-300" />
+        <div className="flex min-h-[100dvh] items-center justify-center bg-[url('/subtle-pattern.svg')] bg-[length:50px_50px] bg-repeat px-4 py-12 sm:px-6 lg:px-8">
+            <div className="mx-auto w-full max-w-md space-y-6 rounded-lg bg-slate-200 p-6 shadow-lg">
+                <div className="space-y-2 text-center">
+                    <h1 className="text-3xl font-bold text-black">Welcome Back</h1>
+                    <p className="text-black text-muted-foreground">Enter your email and password to sign in.</p>
                 </div>
-                <Button className="mb-4 w-full bg-[#fe2c55] text-white">Continue as guest</Button>
-                <p className="mb-4 text-center text-sm text-gray-500">
-                    By continuing with an account located in Vietnam, you agree to our
-                    <a className="text-[#fe2c55]" href="#">
-                        &nbsp;Terms of Service
-                    </a>
-                    &nbsp;and acknowledge that you have read our&nbsp;
-                    <a className="text-[#fe2c55]" href="#">
-                        Privacy Policy
-                    </a>
-                    .&nbsp;
-                </p>
-                <p className="text-center text-sm text-black">
-                    Don't have an account?
-                    <a className="text-[#fe2c55]" href="#">
-                        &nbsp;Sign up
-                    </a>
-                </p>
+                <form className="space-y-4" onSubmit={handleSubmit}>
+                    <div className="space-y-2">
+                        <Label htmlFor="email" className="text-black">
+                            Email
+                        </Label>
+                        <Input
+                            id="email"
+                            type="email"
+                            placeholder="m@example.com"
+                            required
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="password" className="text-black">
+                            Password
+                        </Label>
+                        <Input
+                            id="password"
+                            type="password"
+                            required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <Button type="submit" className="w-full">
+                        Sign In
+                    </Button>
+                </form>
+                <div className="text-center text-sm text-muted-foreground">
+                    Don&apos;t have an account?{' '}
+                    <Link href="#" className="underline" prefetch={false}>
+                        Sign up
+                    </Link>
+                </div>
             </div>
         </div>
     );
