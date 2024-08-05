@@ -4,22 +4,22 @@ export const products: Product[] = [
   {
     id: 1,
     category: "traditional",
-    name: "Sushi 1",
-    image: "/images/traditional/sushi1.png",
+    name: "Vegemite Toast",
+    image: "/images/traditional/vegemitetoast.png",
     price: 34,
   },
   {
     id: 2,
     category: "traditional",
-    name: "Sushi 2",
-    image: "/images/traditional/sushi2.png",
+    name: "Tim Tams",
+    image: "/images/traditional/timtams.jpg",
     price: 49,
   },
   {
     id: 3,
     category: "traditional",
-    name: "Sushi 3",
-    image: "/images/traditional/sushi3.png",
+    name: "Meat Pies",
+    image: "/images/traditional/meatpies.jpg",
     price: 20,
   },
   {
