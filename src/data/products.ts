@@ -60,16 +60,16 @@ export const products: Product[] = [
   {
     id: 9,
     category: "traditional",
-    name: "Sushi 9",
-    image: "/images/traditional/sushi9.png",
+    name: "Grilled Moreton Bay Bug",
+    image: "/images/traditional/moretonbaybug.jpg",
     price: 49,
   },
 
   {
     id: 10,
     category: "modern",
-    name: "Sushi 9",
-    image: "/images/modern/sushi9.png",
+    name: "Seared Hiramasa Kingfish",
+    image: "/images/modern/searedkingfish.jpg",
     price: 49,
   },
 
