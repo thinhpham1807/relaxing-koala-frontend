@@ -74,87 +74,127 @@ export const products: Product[] = [
   },
 
   {
+    id: 11,
+    category: "modern",
+    name: "Jungle Lamb Sausage",
+    image: "/images/modern/junglelambsausage.jpg",
+    price: 25,
+  },
+
+  {
+    id: 12,
+    category: "modern",
+    name: "Eggs Benedict",
+    image: "/images/modern/eggsbenedict.jpg",
+    price: 20,
+  },
+
+  {
+    id: 13,
+    category: "modern",
+    name: "Salt and Pepper Fennel Squid",
+    image: "/images/modern/saltfennelsquid.jpg",
+    price: 30,
+  },
+
+  {
+    id: 14,
+    category: "modern",
+    name: "Lamb With Watermelon",
+    image: "/images/modern/lambandwatermelon.jpg.jpg",
+    price: 45,
+  },
+
+  {
+    id: 15,
+    category: "modern",
+    name: "Fried Whitting With Beer-barrier",
+    image: "/images/modern/friedwhiting.jpg",
+    price: 35,
+  },
+
+  {
     id: 21,
     category: "pack",
-    name: "Combo 1",
-    image: "/images/combo/combo1.png",
-    price: 81,
+    name: "Steak Party",
+    image: "/images/combo/combo1.jpg",
+    price: 101,
   },
   {
     id: 22,
     category: "pack",
-    name: "Combo 2",
-    image: "/images/combo/combo2.png",
-    price: 90,
+    name: "Vanilla Slice And Scrolls",
+    image: "/images/combo/combo2.jpg",
+    price: 70,
   },
   {
     id: 23,
     category: "pack",
-    name: "Combo 3",
-    image: "/images/combo/combo3.png",
+    name: "Aussie Thanksgiving",
+    image: "/images/combo/combo3.jpg",
     price: 99,
   },
   {
     id: 24,
     category: "pack",
-    name: "Combo 4",
-    image: "/images/combo/combo4.png",
+    name: "Kangaroo In The Wild",
+    image: "/images/combo/combo4.jpg",
     price: 132,
   },
-  {
-    id: 25,
-    category: "pack",
-    name: "Combo 5",
-    image: "/images/combo/combo5.png",
-    price: 107,
-  },
-  {
-    id: 26,
-    category: "pack",
-    name: "Combo 6",
-    image: "/images/combo/combo6.png",
-    price: 98,
-  },
-  {
-    id: 27,
-    category: "pack",
-    name: "Combo 7",
-    image: "/images/combo/combo7.png",
-    price: 105,
-  },
-  {
-    id: 28,
-    category: "pack",
-    name: "Combo 8",
-    image: "/images/combo/combo8.png",
-    price: 200,
-  },
-  {
-    id: 29,
-    category: "pack",
-    name: "Combo 9",
-    image: "/images/combo/combo9.png",
-    price: 214,
-  },
+  
   {
     id: 30,
     category: "beverage",
     name: "Fanta",
-    image: "/images/bebidas/bebida1.png",
+    image: "/images/beverage/beverage1.png",
     price: 5.5,
   },
+
   {
     id: 31,
     category: "beverage",
-    name: "H20H",
-    image: "/images/bebidas/bebida4.png",
-    price: 7.25,
+    name: "Aqua - Fizzy Drink",
+    image: "/images/beverage/beverage2.png",
+    price: 5,
   },
+
   {
     id: 32,
     category: "beverage",
-    name: "Watermelon Juice",
-    image: "/images/bebidas/bebida9.png",
+    name: "UVA - Grape Juice",
+    image: "/images/beverage/beverage3.png",
+    price: 6,
+  },
+
+  {
+    id: 33,
+    category: "beverage",
+    name: "H2OH - Water",
+    image: "/images/beverage/beverage4.png",
+    price: 7.25,
+  },
+
+  {
+    id: 34,
+    category: "beverage",
+    name: "Sprite",
+    image: "/images/beverage/beverage5.png",
+    price: 6.5,
+  },
+
+  {
+    id: 34,
+    category: "beverage",
+    name: "Coca Cola",
+    image: "/images/beverage/beverage6.png",
+    price: 6,
+  },
+
+  {
+    id: 36,
+    category: "beverage",
+    name: "Bundaberg",
+    image: "/images/beverage/beverage7.jpg",
     price: 11.75,
   },
 ];
