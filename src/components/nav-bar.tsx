@@ -3,6 +3,7 @@ import { Logo } from '@/components/logo';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { CartSidebar } from '@/components/cart/sidebar';
 import { MenuLink } from '../app/menu/menu-button';
+import { ReservationLink } from '@/app/reservation/reservation-button';
 
 export const Header = () => {
     return (
@@ -12,8 +13,10 @@ export const Header = () => {
                 <ThemeToggle />
             </div>
             <div className="flex items-center gap-3">
+                <ReservationLink />
                 <MenuLink />
                 <CartSidebar />
+
             </div>
         </header>
     );
