@@ -92,7 +92,7 @@ export const products: Product[] = [
     {
         id: 13,
         category: 'modern',
-        name: 'Salt and Pepper Fennel Squid',
+        name: 'Pepper Fennel Squid',
         image: '/images/modern/saltfennelsquid.jpg',
         price: 30,
     },
@@ -108,7 +108,7 @@ export const products: Product[] = [
     {
         id: 15,
         category: 'modern',
-        name: 'Fried Whitting With Beer-barrier',
+        name: 'Fried Whitting',
         image: '/images/modern/friedwhiting.jpg',
         price: 35,
     },
