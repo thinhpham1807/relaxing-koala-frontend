@@ -22,7 +22,7 @@ export default function Component() {
             email: 'john.doe@restaurant.com',
             phone: '555-1234',
             permissions: ['view', 'edit', 'delete'],
-            image: '/placeholder-user.jpg',
+            image: '/images/avatar1.jpg',
             notes: 'Has 5 years of experience in the industry.',
         },
         {
@@ -32,7 +32,7 @@ export default function Component() {
             email: 'jane.smith@restaurant.com',
             phone: '555-5678',
             permissions: ['view', 'edit'],
-            image: '/placeholder-user.jpg',
+            image: '/images/avatar2.jpg',
             notes: 'Excellent customer service skills.',
         },
         {
@@ -42,7 +42,7 @@ export default function Component() {
             email: 'bob.johnson@restaurant.com',
             phone: '555-9012',
             permissions: ['view', 'edit'],
-            image: '/placeholder-user.jpg',
+            image: '/images/avatar3.jpg',
             notes: 'Specializes in Italian cuisine.',
         },
     ]);
