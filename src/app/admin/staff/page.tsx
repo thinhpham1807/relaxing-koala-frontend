@@ -12,6 +12,9 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { CheckboxGroup, CheckboxItem } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import Link from 'next/link';
+import { ViewIcon, CommandIcon, UsersIcon, MenuIcon, SettingsIcon } from 'lucide-react';
 
 export default function Component() {
     const [staff, setStaff] = useState([
@@ -87,7 +90,78 @@ export default function Component() {
     };
     return (
         <div className="bg-white">
-            <div className="container mx-auto px-4 py-8">
+            <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+                <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link
+                                    href="/admin"
+                                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    prefetch={false}
+                                >
+                                    <ViewIcon className="h-5 w-5" />
+                                    <span className="sr-only">Overview</span>
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent side="right">Overview</TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link
+                                    href="#"
+                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    prefetch={false}
+                                >
+                                    <CommandIcon className="h-5 w-5" />
+                                    <span className="sr-only">Orders</span>
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent side="right">Orders</TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link
+                                    href="/admin/staff"
+                                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    prefetch={false}
+                                >
+                                    <UsersIcon className="h-5 w-5" />
+                                    <span className="sr-only">Staff</span>
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent side="right">Staff</TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link
+                                    href="/admin/menu"
+                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    prefetch={false}
+                                >
+                                    <MenuIcon className="h-5 w-5" />
+                                    <span className="sr-only">Menu</span>
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent side="right">Menu</TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link
+                                    href="#"
+                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    prefetch={false}
+                                >
+                                    <SettingsIcon className="h-5 w-5" />
+                                    <span className="sr-only">Settings</span>
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent side="right">Settings</TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                </nav>
+            </aside>
+            <main className="container mx-auto px-4 py-8">
                 <h1 className="mb-6 text-3xl font-bold text-black">Staff Management</h1>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {staff.map((s) => (
@@ -270,7 +344,7 @@ export default function Component() {
                         </form>
                     </Card>
                 </div>
-            </div>
+            </main>
         </div>
     );
 }
