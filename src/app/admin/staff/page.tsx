@@ -22,7 +22,7 @@ export default function Component() {
             email: 'john.doe@restaurant.com',
             phone: '555-1234',
             permissions: ['view', 'edit', 'delete'],
-            image: '/images/avatar1.jpg',
+            image: '/images/avatar1',
             notes: 'Has 5 years of experience in the industry.',
         },
         {
