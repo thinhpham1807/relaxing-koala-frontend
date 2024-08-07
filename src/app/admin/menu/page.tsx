@@ -130,7 +130,7 @@ export default function Component() {
                 </div>
             </header>
             <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-                <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+                <aside className="fixed inset-y-0 left-0 top-20 z-10 hidden w-14 flex-col border-r border-t-2 border-t-white bg-background sm:flex">
                     <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
                         <TooltipProvider>
                             <Tooltip>
