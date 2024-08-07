@@ -362,52 +362,108 @@ export default function Component() {
                             </CardContent>
                         </Card>
                         {/* Form for creating a new menu item or editing an existing one */}
-                        <Card className="my-10 border-white">
-                            <CardHeader>
-                                <CardTitle>Menu Item</CardTitle>
-                                <CardDescription>Create or edit a menu item.</CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <form className="grid gap-4">
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="name">Name</Label>
-                                        <Input id="name" placeholder="Enter menu item name" />
-                                    </div>
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="description">Description</Label>
-                                        <Textarea
-                                            id="description"
-                                            placeholder="Enter a description for the menu item"
-                                            className="min-h-[100px]"
-                                        />
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-4">
+                        <div className="p-4">
+                            {/* Card for creating or editing a menu item */}
+                            <Card className="my-10 border-white">
+                                <CardHeader>
+                                    <CardTitle>Menu Item</CardTitle>
+                                    <CardDescription>Create or edit a menu item.</CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <form
+                                        className="grid gap-4"
+                                        onSubmit={(e) => {
+                                            e.preventDefault();
+                                            editingMenuItem ? handleUpdateMenuItem() : handleCreateMenuItem();
+                                        }}
+                                    >
                                         <div className="grid gap-2">
-                                            <Label htmlFor="price">Price</Label>
-                                            <Input id="price" type="number" placeholder="Enter price" />
+                                            <Label htmlFor="name">Name</Label>
+                                            <Input
+                                                id="name"
+                                                placeholder="Enter menu item name"
+                                                value={editingMenuItem ? editingMenuItem.name : newMenuItem.name}
+                                                onChange={(e) =>
+                                                    editingMenuItem
+                                                        ? handleEditingMenuItemChange('name', e.target.value)
+                                                        : handleNewMenuItemChange('name', e.target.value)
+                                                }
+                                            />
                                         </div>
                                         <div className="grid gap-2">
-                                            <Label htmlFor="category">Category</Label>
-                                            <Select id="category">
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Select category" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectItem value="appetizer">Appetizer</SelectItem>
-                                                    <SelectItem value="entree">Entree</SelectItem>
-                                                    <SelectItem value="dessert">Dessert</SelectItem>
-                                                    <SelectItem value="beverage">Beverage</SelectItem>
-                                                </SelectContent>
-                                            </Select>
+                                            <Label htmlFor="description">Description</Label>
+                                            <Textarea
+                                                id="description"
+                                                placeholder="Enter a description for the menu item"
+                                                className="min-h-[100px]"
+                                                value={
+                                                    editingMenuItem
+                                                        ? editingMenuItem.description
+                                                        : newMenuItem.description
+                                                }
+                                                onChange={(e) =>
+                                                    editingMenuItem
+                                                        ? handleEditingMenuItemChange('description', e.target.value)
+                                                        : handleNewMenuItemChange('description', e.target.value)
+                                                }
+                                            />
                                         </div>
-                                    </div>
-                                </form>
-                            </CardContent>
-                            <CardFooter className="flex justify-end gap-2">
-                                <Button variant="outline">Cancel</Button>
-                                <Button>Save</Button>
-                            </CardFooter>
-                        </Card>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="grid gap-2">
+                                                <Label htmlFor="price">Price</Label>
+                                                <Input
+                                                    id="price"
+                                                    type="number"
+                                                    placeholder="Enter price"
+                                                    value={editingMenuItem ? editingMenuItem.price : newMenuItem.price}
+                                                    onChange={(e) =>
+                                                        editingMenuItem
+                                                            ? handleEditingMenuItemChange('price', e.target.value)
+                                                            : handleNewMenuItemChange('price', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="grid gap-2">
+                                                <Label htmlFor="category">Category</Label>
+                                                <Select
+                                                    id="category"
+                                                    value={
+                                                        editingMenuItem
+                                                            ? editingMenuItem.category
+                                                            : newMenuItem.category
+                                                    }
+                                                    onValueChange={(value) =>
+                                                        editingMenuItem
+                                                            ? handleEditingMenuItemChange('category', value)
+                                                            : handleNewMenuItemChange('category', value)
+                                                    }
+                                                >
+                                                    <SelectTrigger>
+                                                        <SelectValue placeholder="Select category" />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="appetizer">Appetizer</SelectItem>
+                                                        <SelectItem value="entree">Entree</SelectItem>
+                                                        <SelectItem value="dessert">Dessert</SelectItem>
+                                                        <SelectItem value="beverage">Beverage</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+                                        </div>
+                                        <CardFooter className="flex justify-end gap-2">
+                                            <Button
+                                                variant="outline"
+                                                type="button"
+                                                onClick={() => setEditingMenuItem(null)}
+                                            >
+                                                Cancel
+                                            </Button>
+                                            <Button type="submit">{editingMenuItem ? 'Update' : 'Save'}</Button>
+                                        </CardFooter>
+                                    </form>
+                                </CardContent>
+                            </Card>
+                        </div>
                     </div>
                 </main>
             </div>
