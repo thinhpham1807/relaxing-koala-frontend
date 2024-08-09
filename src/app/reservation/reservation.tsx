@@ -1,24 +1,35 @@
 'use client';
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
-import { format } from 'date-fns';
+import { format, set } from 'date-fns';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 
 export default function Reservation() {
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
+    const [formattedDate, setFormattedDate] = useState<string>('');
     const [selectedTime, setSelectedTime] = useState<string>('7:00 PM');
     const [selectedGuests, setSelectedGuests] = useState<string>('2');
-    const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
     const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState<boolean>(false);
+    const [isDatePopoverOpen, setIsDatePopoverOpen] = useState<boolean>(false); // State for controlling Popover
 
-    const handleDateChange = (date: Date) => {
-        setSelectedDate(date);
+    // Update formattedDate whenever selectedDate changes
+    useEffect(() => {
+        if (selectedDate) {
+            setFormattedDate(format(selectedDate, 'MM/dd/yyyy'));
+        } else {
+            setFormattedDate('Select Date');
+        }
+    }, [selectedDate]);
+
+    const setDate = (range: DateRange) => {
+        const [start, end] = range;
+        alert('Date selected: ' + start);
+        setSelectedDate(start);
     };
 
     const handleTimeChange = (time: string) => {
@@ -31,12 +42,16 @@ export default function Reservation() {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        // Trigger the success dialog
+
+        if (!selectedDate || !selectedTime) {
+            alert('Please select a valid date and time.');
+            return;
+        }
+
         setIsSuccessDialogOpen(true);
     };
 
     const handleCloseDialog = () => {
-        setIsDialogOpen(false);
         setIsSuccessDialogOpen(false);
     };
 
@@ -64,40 +79,38 @@ export default function Reservation() {
                                                 <SelectValue placeholder="Select number of guests" />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                <SelectItem value="1">1 Guest</SelectItem>
-                                                <SelectItem value="2">2 Guests</SelectItem>
-                                                <SelectItem value="3">3 Guests</SelectItem>
-                                                <SelectItem value="4">4 Guests</SelectItem>
-                                                <SelectItem value="5">5 Guests</SelectItem>
-                                                <SelectItem value="6">6 Guests</SelectItem>
-                                                <SelectItem value="7">7 Guests</SelectItem>
-                                                <SelectItem value="8">8 Guests</SelectItem>
-                                                <SelectItem value="9">9 Guests</SelectItem>
-                                                <SelectItem value="10">10 Guests</SelectItem>
+                                                {[...Array(10).keys()].map((i) => (
+                                                    <SelectItem key={i + 1} value={(i + 1).toString()}>
+                                                        {i + 1} {i + 1 === 1 ? 'Guest' : 'Guests'}
+                                                    </SelectItem>
+                                                ))}
                                             </SelectContent>
                                         </Select>
                                     </div>
-                                    <Popover>
+                                    <Popover open={isDatePopoverOpen} onOpenChange={setIsDatePopoverOpen}>
                                         <PopoverTrigger asChild>
                                             <div className="grid gap-2">
                                                 <Label htmlFor="date">Date</Label>
                                                 <Button
                                                     variant="outline"
                                                     className="h-auto w-full flex-col items-start"
+                                                    type="button"
+                                                    onClick={() => setIsDatePopoverOpen(true)} // Open Popover
                                                 >
                                                     <span className="text-[0.65rem] font-semibold uppercase">
                                                         Select Date
                                                     </span>
-                                                    <span className="font-normal">
-                                                        {selectedDate
-                                                            ? format(selectedDate, 'MM/dd/yyyy')
-                                                            : 'Select Date'}
-                                                    </span>
+                                                    <span className="font-normal">{formattedDate}</span>
                                                 </Button>
                                             </div>
                                         </PopoverTrigger>
                                         <PopoverContent className="max-w-[276px] p-0">
-                                            <Calendar selected={selectedDate} onSelect={handleDateChange} />
+                                            <Calendar
+                                                mode="single"
+                                                selected={selectedDate}
+                                                onSelect={setSelectedDate}
+                                                disabled={(date: any) => date < new Date()} // Disable past dates
+                                            />
                                         </PopoverContent>
                                     </Popover>
                                 </div>
@@ -105,7 +118,11 @@ export default function Reservation() {
                                     <PopoverTrigger asChild>
                                         <div className="grid gap-2">
                                             <Label htmlFor="time">Time</Label>
-                                            <Button variant="outline" className="h-auto w-full flex-col items-start">
+                                            <Button
+                                                variant="outline"
+                                                className="h-auto w-full flex-col items-start"
+                                                type="button"
+                                            >
                                                 <span className="text-[0.65rem] font-semibold uppercase">
                                                     Select Time
                                                 </span>
@@ -122,6 +139,7 @@ export default function Reservation() {
                                                         variant="ghost"
                                                         className="rounded-md"
                                                         onClick={() => handleTimeChange(time)}
+                                                        type="button"
                                                     >
                                                         {time}
                                                     </Button>
@@ -146,12 +164,12 @@ export default function Reservation() {
                     </DialogHeader>
                     <div className="space-y-4">
                         <p>Your reservation has been confirmed.</p>
-                        <p>Date: {format(selectedDate, 'MM/dd/yyyy')}</p>
+                        <p>Date: {formattedDate}</p>
                         <p>Time: {selectedTime}</p>
                         <p>Guests: {selectedGuests}</p>
                     </div>
                     <DialogFooter>
-                        <Button variant="primary" onClick={handleCloseDialog}>
+                        <Button variant="link" onClick={handleCloseDialog}>
                             Close
                         </Button>
                     </DialogFooter>
