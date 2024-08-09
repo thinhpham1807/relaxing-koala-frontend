@@ -21,9 +21,9 @@ export default function Component() {
                     <p className="text-muted-foreground">Your order has been processed and is on its way.</p>
                 </CardContent>
                 <CardFooter>
-                    <Button className="w-full bg-red-400">
-                        <Link href="/menu">Back to Menu</Link>
-                    </Button>
+                    <Link className="w-full bg-red-400" href="/menu">
+                        <Button className="w-full bg-red-400">Back to Menu</Button>
+                    </Link>
                 </CardFooter>
             </Card>
         </div>
