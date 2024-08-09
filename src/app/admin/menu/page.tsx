@@ -1,3 +1,4 @@
+'use client';
 /**
  * v0 by Vercel.
  * @see https://v0.dev/t/lEWTObiErFn
@@ -14,10 +15,81 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from '@/components/ui/card';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
+import { useState } from 'react';
+
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 
 export default function Component() {
+    const [menuItems, setMenuItems] = useState([
+        {
+            id: 1,
+            name: 'Beef Burger',
+            description: 'Juicy beef patty, lettuce, tomato, onion',
+            price: '$12.99',
+            category: 'Burgers',
+        },
+        {
+            id: 2,
+            name: 'Margherita Pizza',
+            description: 'Tomato sauce, mozzarella, basil',
+            price: '$14.99',
+            category: 'Pizza',
+        },
+        {
+            id: 3,
+            name: 'Caesar Salad',
+            description: 'Romaine lettuce, croutons, parmesan, caesar dressing',
+            price: '$9.99',
+            category: 'Salads',
+        },
+    ]);
+
+    const [newMenuItem, setNewMenuItem] = useState({
+        name: '',
+        description: '',
+        price: '',
+        category: '',
+    });
+
+    const [editingMenuItem, setEditingMenuItem] = useState<any>(null);
+
+    const handleCreateMenuItem = () => {
+        setMenuItems([...menuItems, { ...newMenuItem, id: menuItems.length + 1 }]);
+        setNewMenuItem({
+            name: '',
+            description: '',
+            price: '',
+            category: '',
+        });
+    };
+
+    const handleUpdateMenuItem = () => {
+        const updatedMenuItems = menuItems.map((item) => (item.id === editingMenuItem.id ? editingMenuItem : item));
+        setMenuItems(updatedMenuItems);
+        setEditingMenuItem(null);
+    };
+
+    const handleDeleteMenuItem = (id: any) => {
+        setMenuItems(menuItems.filter((item) => item.id !== id));
+    };
+
+    const handleEditMenuItem = (item: any) => {
+        setEditingMenuItem(item);
+    };
+
+    const handleNewMenuItemChange = (field: any, value: any) => {
+        setNewMenuItem({ ...newMenuItem, [field]: value });
+    };
+
+    const handleEditingMenuItemChange = (field: any, value: any) => {
+        setEditingMenuItem({ ...editingMenuItem, [field]: value });
+    };
+
     return (
         <div className="flex min-h-screen w-full flex-col bg-muted/40">
             <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -58,13 +130,13 @@ export default function Component() {
                 </div>
             </header>
             <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-                <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+                <aside className="fixed inset-y-0 left-0 top-20 z-10 hidden w-14 flex-col border-r border-t-2 border-t-white bg-background sm:flex">
                     <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger asChild>
                                     <Link
-                                        href="#"
+                                        href="/admin"
                                         className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                                         prefetch={false}
                                     >
@@ -90,20 +162,20 @@ export default function Component() {
                             <Tooltip>
                                 <TooltipTrigger asChild>
                                     <Link
-                                        href="#"
+                                        href="/admin/staff"
                                         className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                                         prefetch={false}
                                     >
                                         <UsersIcon className="h-5 w-5" />
-                                        <span className="sr-only">Customers</span>
+                                        <span className="sr-only">Staff</span>
                                     </Link>
                                 </TooltipTrigger>
-                                <TooltipContent side="right">Customers</TooltipContent>
+                                <TooltipContent side="right">Staff</TooltipContent>
                             </Tooltip>
                             <Tooltip>
                                 <TooltipTrigger asChild>
                                     <Link
-                                        href="#"
+                                        href="/admin/menu"
                                         className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                                         prefetch={false}
                                     >
@@ -131,7 +203,7 @@ export default function Component() {
                 </aside>
                 <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
                     <div className="col-span-2 lg:col-span-3">
-                        <Card>
+                        <Card className="my-10 border-white">
                             <CardHeader className="flex flex-row items-center justify-between pb-2">
                                 <CardTitle className="text-sm font-medium">Menu Management</CardTitle>
                                 <Button variant="outline" size="sm" className="h-8 gap-1">
@@ -140,7 +212,7 @@ export default function Component() {
                                 </Button>
                             </CardHeader>
                             <CardContent>
-                                <Table>
+                                {/* <Table>
                                     <TableHeader>
                                         <TableRow>
                                             <TableHead>Item</TableHead>
@@ -242,9 +314,156 @@ export default function Component() {
                                             </TableCell>
                                         </TableRow>
                                     </TableBody>
-                                </Table>
+                                </Table> */}
+                                <div>
+                                    <Table>
+                                        <TableHeader>
+                                            <TableRow>
+                                                <TableHead>Name</TableHead>
+                                                <TableHead>Description</TableHead>
+                                                <TableHead>Price</TableHead>
+                                                <TableHead>Category</TableHead>
+                                                <TableHead>Actions</TableHead>
+                                            </TableRow>
+                                        </TableHeader>
+                                        <TableBody>
+                                            {menuItems.map((item) => (
+                                                <TableRow key={item.id}>
+                                                    <TableCell className="font-medium">{item.name}</TableCell>
+                                                    <TableCell>{item.description}</TableCell>
+                                                    <TableCell className="text-right">{item.price}</TableCell>
+                                                    <TableCell>{item.category}</TableCell>
+                                                    <TableCell>
+                                                        <div className="flex items-center gap-2">
+                                                            <Button
+                                                                variant="outline"
+                                                                size="icon"
+                                                                onClick={() => handleEditMenuItem(item)}
+                                                            >
+                                                                <FilePenIcon className="h-4 w-4" />
+                                                                <span className="sr-only">Edit {item.name}</span>
+                                                            </Button>
+                                                            <Button
+                                                                variant="outline"
+                                                                size="icon"
+                                                                className="text-red-500"
+                                                                onClick={() => handleDeleteMenuItem(item.id)}
+                                                            >
+                                                                <TrashIcon className="h-4 w-4" />
+                                                                <span className="sr-only">Delete {item.name}</span>
+                                                            </Button>
+                                                        </div>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </div>
                             </CardContent>
                         </Card>
+                        {/* Form for creating a new menu item or editing an existing one */}
+                        <div className="p-4">
+                            {/* Card for creating or editing a menu item */}
+                            <Card className="my-10 border-white">
+                                <CardHeader>
+                                    <CardTitle>Menu Item</CardTitle>
+                                    <CardDescription>Create or edit a menu item.</CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <form
+                                        className="grid gap-4"
+                                        onSubmit={(e) => {
+                                            e.preventDefault();
+                                            editingMenuItem ? handleUpdateMenuItem() : handleCreateMenuItem();
+                                        }}
+                                    >
+                                        <div className="grid gap-2">
+                                            <Label htmlFor="name">Name</Label>
+                                            <Input
+                                                id="name"
+                                                placeholder="Enter menu item name"
+                                                value={editingMenuItem ? editingMenuItem.name : newMenuItem.name}
+                                                onChange={(e) =>
+                                                    editingMenuItem
+                                                        ? handleEditingMenuItemChange('name', e.target.value)
+                                                        : handleNewMenuItemChange('name', e.target.value)
+                                                }
+                                            />
+                                        </div>
+                                        <div className="grid gap-2">
+                                            <Label htmlFor="description">Description</Label>
+                                            <Textarea
+                                                id="description"
+                                                placeholder="Enter a description for the menu item"
+                                                className="min-h-[100px]"
+                                                value={
+                                                    editingMenuItem
+                                                        ? editingMenuItem.description
+                                                        : newMenuItem.description
+                                                }
+                                                onChange={(e) =>
+                                                    editingMenuItem
+                                                        ? handleEditingMenuItemChange('description', e.target.value)
+                                                        : handleNewMenuItemChange('description', e.target.value)
+                                                }
+                                            />
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="grid gap-2">
+                                                <Label htmlFor="price">Price</Label>
+                                                <Input
+                                                    id="price"
+                                                    type="number"
+                                                    placeholder="Enter price"
+                                                    value={editingMenuItem ? editingMenuItem.price : newMenuItem.price}
+                                                    onChange={(e) =>
+                                                        editingMenuItem
+                                                            ? handleEditingMenuItemChange('price', e.target.value)
+                                                            : handleNewMenuItemChange('price', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="grid gap-2">
+                                                <Label htmlFor="category">Category</Label>
+                                                <Select
+                                                    id="category"
+                                                    value={
+                                                        editingMenuItem
+                                                            ? editingMenuItem.category
+                                                            : newMenuItem.category
+                                                    }
+                                                    onValueChange={(value) =>
+                                                        editingMenuItem
+                                                            ? handleEditingMenuItemChange('category', value)
+                                                            : handleNewMenuItemChange('category', value)
+                                                    }
+                                                >
+                                                    <SelectTrigger>
+                                                        <SelectValue placeholder="Select category" />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="appetizer">Appetizer</SelectItem>
+                                                        <SelectItem value="entree">Entree</SelectItem>
+                                                        <SelectItem value="dessert">Dessert</SelectItem>
+                                                        <SelectItem value="beverage">Beverage</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+                                        </div>
+                                        <CardFooter className="flex justify-end gap-2">
+                                            <Button
+                                                variant="outline"
+                                                type="button"
+                                                onClick={() => setEditingMenuItem(null)}
+                                            >
+                                                Cancel
+                                            </Button>
+                                            <Button type="submit">{editingMenuItem ? 'Update' : 'Save'}</Button>
+                                        </CardFooter>
+                                    </form>
+                                </CardContent>
+                            </Card>
+                        </div>
                     </div>
                 </main>
             </div>
