@@ -8,13 +8,14 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 
 export default function Reservation() {
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
     const [selectedTime, setSelectedTime] = useState<string>('7:00 PM');
     const [selectedGuests, setSelectedGuests] = useState<string>('2');
     const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+    const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState<boolean>(false);
 
     const handleDateChange = (date: Date) => {
         setSelectedDate(date);
@@ -30,8 +31,13 @@ export default function Reservation() {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        // Show success dialog
-        setIsDialogOpen(true);
+        // Trigger the success dialog
+        setIsSuccessDialogOpen(true);
+    };
+
+    const handleCloseDialog = () => {
+        setIsDialogOpen(false);
+        setIsSuccessDialogOpen(false);
     };
 
     return (
@@ -91,7 +97,7 @@ export default function Reservation() {
                                             </div>
                                         </PopoverTrigger>
                                         <PopoverContent className="max-w-[276px] p-0">
-                                            <Calendar selected={selectedDate} onChange={handleDateChange} />
+                                            <Calendar selected={selectedDate} onSelect={handleDateChange} />
                                         </PopoverContent>
                                     </Popover>
                                 </div>
@@ -133,13 +139,22 @@ export default function Reservation() {
                 </div>
             </section>
 
-            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent>
+            <Dialog open={isSuccessDialogOpen} onOpenChange={handleCloseDialog}>
+                <DialogContent className="sm:max-w-md">
                     <DialogHeader>
                         <DialogTitle>Reservation Successful</DialogTitle>
                     </DialogHeader>
-                    <p>Your table has been successfully reserved at Relaxing Koala Restaurant.</p>
-                    <Button onClick={() => setIsDialogOpen(false)}>Close</Button>
+                    <div className="space-y-4">
+                        <p>Your reservation has been confirmed.</p>
+                        <p>Date: {format(selectedDate, 'MM/dd/yyyy')}</p>
+                        <p>Time: {selectedTime}</p>
+                        <p>Guests: {selectedGuests}</p>
+                    </div>
+                    <DialogFooter>
+                        <Button variant="primary" onClick={handleCloseDialog}>
+                            Close
+                        </Button>
+                    </DialogFooter>
                 </DialogContent>
             </Dialog>
         </div>
