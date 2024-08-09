@@ -25,12 +25,12 @@ import {
 } from "../ui/select";
 
 const formSchema = z.object({
-  street: z.string().min(2, "Preencha o endereço"),
-  number: z.string().min(2, "Preencha o número"),
+  street: z.string().min(2, "Please provide the correct address."),
+  number: z.string().min(2, "Please provide a valid number."),
   complement: z.string().optional(),
-  district: z.string().min(2, "Preencha o bairro"),
-  city: z.string().min(2, "Preencha a cidade"),
-  state: z.string().min(2, "Preencha o estado"),
+  district: z.string().min(2, "Please provide the correct district."),
+  city: z.string().min(2, "Please provide the correct city."),
+  state: z.string().min(2, "Please provide the correct state."),
 });
 
 type Props = {
