@@ -39,7 +39,7 @@ export const CheckoutDialog = ({ open, onOpenChange }: Props) => {
                     <DialogTitle>
                         {step === 'user' && 'Personal data'}
                         {step === 'address' && 'Delivery address'}
-                        {step === 'finish' && 'Sending to Mail'}
+                        {step === 'finish' && 'Confirmation'}
                     </DialogTitle>
                 </DialogHeader>
 

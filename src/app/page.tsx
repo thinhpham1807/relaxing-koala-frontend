@@ -44,8 +44,8 @@ export default function Component() {
                         />
                     </div>
                     <div>
-                        <p>Admin: admin@admin (pwd: 1)</p>
-                        <p>Customer: your email (pwd: 1)</p>
+                        {/* <p>Admin: admin@admin (pwd: 1)</p>
+                        <p>Customer: your email (pwd: 1)</p> */}
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="password" className="text-black">

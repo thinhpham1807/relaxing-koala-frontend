@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { CheckoutSteps } from '@/types/checkout-steps';
 import { Dispatch, SetStateAction } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
     number: z.string().min(10, 'Preencha o número corretamente'),
@@ -28,6 +28,9 @@ export const StepFinish = ({ setStep }: Props) => {
 
     const message = generateMessage();
 
+    const router = useRouter(); // Moved useRouter to the top level
+
+
     const onSubmit = (values: z.infer<typeof formSchema>) => {
         const link = `https://wa.me//${values.number}?text=${encodeURI(message)}`;
         window.open(link, '_blank');
@@ -39,8 +42,7 @@ export const StepFinish = ({ setStep }: Props) => {
                 Hey <strong>{name}</strong>!
             </p>
             <p>
-                Now we are sending your order to your email to complete. Our restaurant will inform you about the status
-                of your order.
+                Ensure all your details are correct before moving to the checkout.
             </p>
             <Form {...form}>
                 <form action="" onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3">
@@ -51,9 +53,9 @@ export const StepFinish = ({ setStep }: Props) => {
                             render={({ field }) => {
                                 return (
                                     <FormItem>
-                                        <FormLabel>Fill in Email</FormLabel>
+                                        <FormLabel>Notes</FormLabel>
                                         <FormControl>
-                                            <Input {...field} placeholder="Ex.: johndoe@gmail.com" />
+                                            <Input {...field} placeholder="Ex: Leave the package at the front door." />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -68,11 +70,10 @@ export const StepFinish = ({ setStep }: Props) => {
                         </Button>
                         <Button
                             onClick={() => {
-                                const router = useRouter();
                                 router.push('/payment');
                             }}
                         >
-                            Send to Email
+                            Proceed to Checkout
                         </Button>
                     </div>
                 </form>
