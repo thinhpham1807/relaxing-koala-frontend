@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { format, set } from 'date-fns';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { DateRange } from 'react-day-picker';
 
 export default function Reservation() {
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
@@ -26,10 +27,22 @@ export default function Reservation() {
         }
     }, [selectedDate]);
 
+    type DateRange = [Date, Date];
+
+    // Your function
     const setDate = (range: DateRange) => {
         const [start, end] = range;
-        alert('Date selected: ' + start);
-        setSelectedDate(start);
+
+        // Ensure start and end are valid dates
+        if (start instanceof Date && end instanceof Date) {
+            // Alert or log the start date (you might want to handle this differently in production)
+            alert(`Date selected: ${start.toLocaleDateString()}`);
+
+            // Update the selected date state
+            setSelectedDate(start);
+        } else {
+            console.error('Invalid date range provided');
+        }
     };
 
     const handleTimeChange = (time: string) => {
@@ -74,7 +87,10 @@ export default function Reservation() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="grid gap-2">
                                         <Label htmlFor="guests">Guests</Label>
-                                        <Select id="guests" value={selectedGuests} onValueChange={handleGuestsChange}>
+                                        <Select 
+                                            // id="guests" 
+                                            value={selectedGuests} 
+                                            onValueChange={handleGuestsChange}>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Select number of guests" />
                                             </SelectTrigger>

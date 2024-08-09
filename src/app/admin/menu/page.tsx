@@ -402,7 +402,7 @@ export default function Component() {
                                             <div className="grid gap-2">
                                                 <Label htmlFor="category">Category</Label>
                                                 <Select
-                                                    id="category"
+                                                    // id="category"
                                                     value={
                                                         editingMenuItem
                                                             ? editingMenuItem.category
