@@ -1,5 +1,9 @@
 'use client';
-
+/**
+ * v0 by Vercel.
+ * @see https://v0.dev/t/lEWTObiErFn
+ * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ */
 import Link from 'next/link';
 import {
     DropdownMenu,
@@ -89,17 +93,6 @@ export default function Component() {
     return (
         <div className="flex min-h-screen w-full flex-col bg-muted/40">
             <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-                <div className="flex items-center gap-4">
-                    <Link
-                        href="#"
-                        className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
-                        prefetch={false}
-                    >
-                        <MenuIcon className="h-5 w-5 transition-all group-hover:scale-110" />
-                        <span className="sr-only">Relaxing Koala</span>
-                    </Link>
-                    <h1 className="text-lg font-bold">Relaxing Koala</h1>
-                </div>
                 <div className="ml-auto flex items-center gap-2">
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -141,19 +134,6 @@ export default function Component() {
                                     </Link>
                                 </TooltipTrigger>
                                 <TooltipContent side="right">Overview</TooltipContent>
-                            </Tooltip>
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Link
-                                        href="#"
-                                        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                                        prefetch={false}
-                                    >
-                                        <CommandIcon className="h-5 w-5" />
-                                        <span className="sr-only">Orders</span>
-                                    </Link>
-                                </TooltipTrigger>
-                                <TooltipContent side="right">Orders</TooltipContent>
                             </Tooltip>
                             <Tooltip>
                                 <TooltipTrigger asChild>
@@ -201,7 +181,7 @@ export default function Component() {
                     <div className="col-span-2 lg:col-span-3">
                         <Card className="my-10 border-white">
                             <CardHeader className="flex flex-row items-center justify-between pb-2">
-                                <CardTitle className="font-large text-sm">Menu Management</CardTitle>
+                                <h1 className="mb-6 text-3xl font-bold text-black">Menu Management</h1>
                                 <Button variant="outline" size="sm" className="h-8 gap-1">
                                     <PlusIcon className="h-3.5 w-3.5" />
                                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">Add Menu Item</span>

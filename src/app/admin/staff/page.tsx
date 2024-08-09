@@ -1,8 +1,3 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/XEq3zEYlGsT
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 'use client';
 
 import { useState } from 'react';
@@ -10,7 +5,6 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { CheckboxGroup, CheckboxItem } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import Link from 'next/link';
@@ -105,19 +99,6 @@ export default function Component() {
                                 </Link>
                             </TooltipTrigger>
                             <TooltipContent side="right">Overview</TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Link
-                                    href="#"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                                    prefetch={false}
-                                >
-                                    <CommandIcon className="h-5 w-5" />
-                                    <span className="sr-only">Orders</span>
-                                </Link>
-                            </TooltipTrigger>
-                            <TooltipContent side="right">Orders</TooltipContent>
                         </Tooltip>
                         <Tooltip>
                             <TooltipTrigger asChild>
