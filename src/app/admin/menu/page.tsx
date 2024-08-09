@@ -1,9 +1,5 @@
 'use client';
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/lEWTObiErFn
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
+
 import Link from 'next/link';
 import {
     DropdownMenu,
@@ -100,9 +96,9 @@ export default function Component() {
                         prefetch={false}
                     >
                         <MenuIcon className="h-5 w-5 transition-all group-hover:scale-110" />
-                        <span className="sr-only">Acme Restaurant</span>
+                        <span className="sr-only">Relaxing Koala</span>
                     </Link>
-                    <h1 className="text-lg font-bold">Acme Restaurant</h1>
+                    <h1 className="text-lg font-bold">Relaxing Koala</h1>
                 </div>
                 <div className="ml-auto flex items-center gap-2">
                     <DropdownMenu>
@@ -205,7 +201,7 @@ export default function Component() {
                     <div className="col-span-2 lg:col-span-3">
                         <Card className="my-10 border-white">
                             <CardHeader className="flex flex-row items-center justify-between pb-2">
-                                <CardTitle className="text-sm font-medium">Menu Management</CardTitle>
+                                <CardTitle className="font-large text-sm">Menu Management</CardTitle>
                                 <Button variant="outline" size="sm" className="h-8 gap-1">
                                     <PlusIcon className="h-3.5 w-3.5" />
                                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">Add Menu Item</span>

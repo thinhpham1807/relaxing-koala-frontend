@@ -8,10 +8,13 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 export default function Reservation() {
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
-    const [selectedTime, setSelectedTime] = useState<string | undefined>('7:00 PM');
+    const [selectedTime, setSelectedTime] = useState<string>('7:00 PM');
+    const [selectedGuests, setSelectedGuests] = useState<string>('2');
+    const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
     const handleDateChange = (date: Date) => {
         setSelectedDate(date);
@@ -19,6 +22,16 @@ export default function Reservation() {
 
     const handleTimeChange = (time: string) => {
         setSelectedTime(time);
+    };
+
+    const handleGuestsChange = (guests: string) => {
+        setSelectedGuests(guests);
+    };
+
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
+        // Show success dialog
+        setIsDialogOpen(true);
     };
 
     return (
@@ -36,11 +49,11 @@ export default function Reservation() {
                     </div>
                     <Card>
                         <CardContent className="space-y-4">
-                            <form className="grid gap-4">
+                            <form className="grid gap-4" onSubmit={handleSubmit}>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="grid gap-2">
                                         <Label htmlFor="guests">Guests</Label>
-                                        <Select id="guests">
+                                        <Select id="guests" value={selectedGuests} onValueChange={handleGuestsChange}>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Select number of guests" />
                                             </SelectTrigger>
@@ -119,6 +132,16 @@ export default function Reservation() {
                     </Card>
                 </div>
             </section>
+
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Reservation Successful</DialogTitle>
+                    </DialogHeader>
+                    <p>Your table has been successfully reserved at Relaxing Koala Restaurant.</p>
+                    <Button onClick={() => setIsDialogOpen(false)}>Close</Button>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }

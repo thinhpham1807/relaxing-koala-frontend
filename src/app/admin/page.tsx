@@ -29,9 +29,9 @@ export default function Component() {
                         prefetch={false}
                     >
                         <MenuIcon className="h-5 w-5 transition-all group-hover:scale-110" />
-                        <span className="sr-only">Acme Restaurant</span>
+                        <span className="sr-only">Relaxing Koala</span>
                     </Link>
-                    <h1 className="text-lg font-bold">Acme Restaurant</h1>
+                    <h1 className="text-lg font-bold">Relaxing Koala</h1>
                 </div>
                 <div className="ml-auto flex items-center gap-2">
                     <DropdownMenu>
