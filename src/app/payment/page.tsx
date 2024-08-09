@@ -10,8 +10,53 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 export default function Component() {
-    const [expirationMonth, setExpirationMonth] = useState<string | null>(null);
-    const [expirationYear, setExpirationYear] = useState<string | null>(null);
+    const [expirationMonth, setExpirationMonth] = useState<string>('01');
+    const [expirationYear, setExpirationYear] = useState<string>('2031');
+
+    const [cvc, setCvc] = useState('');
+    const [isCvcValid, setIsCvcValid] = useState(true);
+
+    const [cardNumber, setCardNumber] = useState('');
+    const [isCardValid, setIsCardValid] = useState(true);
+
+    const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+        setCardNumber(value);
+
+        // Validate the card number using the Luhn algorithm
+        if (value.length >= 13 && value.length <= 19) {
+            setIsCardValid(luhnCheck(value));
+        } else {
+            setIsCardValid(false);
+        }
+    };
+
+    const handleCvcChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+        setCvc(value);
+
+        // Validate CVC length (3 or 4 digits)
+        setIsCvcValid(value.length === 3 || value.length === 4);
+    };
+
+    // Luhn algorithm to validate card number
+    const luhnCheck = (num: string) => {
+        let sum = 0;
+        let shouldDouble = false;
+
+        for (let i = num.length - 1; i >= 0; i--) {
+            let digit = parseInt(num.charAt(i), 10);
+
+            if (shouldDouble) {
+                if ((digit *= 2) > 9) digit -= 9;
+            }
+
+            sum += digit;
+            shouldDouble = !shouldDouble;
+        }
+
+        return sum % 10 === 0;
+    };
 
     return (
         <div className="flex min-h-screen flex-col items-center justify-center bg-background">
@@ -40,7 +85,18 @@ export default function Component() {
                     <form className="grid gap-4">
                         <div className="grid gap-2">
                             <Label htmlFor="card-number">Card Number</Label>
-                            <Input id="card-number" type="text" placeholder="0000 0000 0000 0000" />
+                            <Input
+                                id="card-number"
+                                type="tel"
+                                placeholder="0000 0000 0000 0000"
+                                maxLength={19}
+                                value={cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ')} // Format as 0000 0000 0000 0000
+                                onChange={handleCardNumberChange}
+                                className={isCardValid ? '' : 'border-red-500'}
+                            />
+                            {!isCardValid && (
+                                <div className="text-sm text-red-500">Please enter a valid card number.</div>
+                            )}
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                             <div className="grid gap-2">
@@ -74,11 +130,20 @@ export default function Component() {
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="cvc">CVC</Label>
-                                <Input id="cvc" type="text" placeholder="123" />
+                                <Input
+                                    id="cvc"
+                                    type="tel"
+                                    placeholder="123"
+                                    maxLength={4}
+                                    value={cvc}
+                                    onChange={handleCvcChange}
+                                    className={isCvcValid ? '' : 'border-red-500'}
+                                />
+                                {!isCvcValid && <div className="text-sm text-red-500">Please enter a valid CVC.</div>}
                             </div>
                         </div>
                         <Link href="/payment/succeed" passHref>
-                            <Button className="w-full">Pay $39</Button>
+                            <Button className="w-full">Pay</Button>
                         </Link>
                     </form>
                 </CardContent>
