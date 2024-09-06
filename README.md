@@ -1,39 +1,67 @@
-# SWE30003
-Frontend restaurant using Next.js, shadcn-ui, hook-form, zod and zustand. Responsivity and dark/system theme.
-=======
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SWE30003 - Software Architecture and Design
 
-## Getting Started
+# Relaxing Koala Restaurant Information System (RIS)
 
-First, run the development server:
+## Overview
+Relaxing Koala is a cafe and restaurant based in Hawthorn that provides a comfortable environment for guests with delicious food and drinks. This Restaurant Information System (RIS) was developed in collaboration with Swinsoft Consulting to automate core operations like reservations, order management, kitchen communication, invoicing, payments, and providing statistical insights.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Key Features
+- **Reservations**: Manage table bookings with a reservation system, including reminders and availability updates.
+- **Order Management**: Process dine-in orders and online food deliveries with kitchen integration and status tracking.
+- **Payment Processing**: Secure and seamless handling of customer payments through various methods.
+- **Menu Management**: Enable admin to modify, add, and delete menu items dynamically.
+- **Staff Administration**: Manage staff roles, permissions, and details through a dedicated admin interface.
+- **Dashboard**: Admin overview dashboard showcasing key restaurant metrics and statistics.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## System Architecture
+The project follows a modular, object-oriented design (OOD) with a focus on separation of concerns. Key components include:
+- **Model Classes**: Represent domain-specific entities like reservations, orders, tables, and payments.
+- **Manager Classes**: Handle business logic for reservations, orders, payments, and user authentication.
+- **DatabaseManager**: Interfaces with the database for CRUD operations.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Design Patterns
+The system employs several design patterns for scalability and maintainability, including:
+- **Singleton**
+- **Strategy**
+- **MVC**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies Used
+- **Frontend**: React, TailwindCSS, Radix UI
+- **Backend**: Node.js, Next.js
+- **Database**: MySQL
+- **Version Control**: Git (GitFlow branching model)
 
-## Learn More
+## Deployment
+Steps to deploy the application:
+1. **Download the source code**: Download the zip file and extract it.
+2. **Install dependencies**: Run `npm install` in the project directory.
+3. **Build the application**: Execute `npm run build` to compile the app for production.
+4. **Deploy**: Upload the built files to a hosting platform (e.g., Vercel).
+5. **Access the app**: The app is accessible at [Relaxing Koala](https://relaxing-koala-ten.vercel.app/).
+   - **Admin login**: `admin@admin`, password: `1`
+   - **Customer login**: Use your email, password: `1`
 
-To learn more about Next.js, take a look at the following resources:
+## Scenarios
+1. **Login Authentication**: Customers and admins can log in to access respective functionalities.
+2. **Make a Reservation**: Customers can book tables, with the system handling availability checks.
+3. **Menu Order**: Customers can browse the menu and place orders, either for dine-in or delivery.
+4. **Payment Processing**: Secure payment integration for customer orders.
+5. **Modify Menu Items**: Admins can manage menu items, add new dishes, or update existing ones.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Security
+The system includes several advanced security measures:
+- Data encryption for sensitive information.
+- User authentication and role-based access control.
+- Regular security audits and penetration tests.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Lessons Learned
+This project reinforced the importance of clear requirements gathering, stakeholder involvement, and the adoption of Agile methodologies for flexible and efficient development.
 
-## Deploy on Vercel
+## License
+This project is licensed under the [MIT License](LICENSE).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Authors
+- Quang Hai Le Hai
+- Duc Thinh Pham
+- Nguyen Khang Le Khang
+- Tai Minh Huy Nguyen Huy
